@@ -2,7 +2,7 @@ use nvim_oxi::{
     Dictionary, Function,
     api::{
         self,
-        opts::{CreateCommandOpts, NotifyOpts},
+        opts::CreateCommandOpts,
         types::{CommandArgs, CommandNArgs, LogLevel},
     },
     plugin, print,
@@ -44,7 +44,7 @@ fn cmd(args: CommandArgs) {
             let _ = api::notify(
                 &format!("Unknown command \"{cmd}\""),
                 LogLevel::Error,
-                &NotifyOpts {},
+                &Dictionary::new(),
             );
         }
     }
