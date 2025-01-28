@@ -3,5 +3,9 @@ name = "neoshare"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+crate-type = ["cdylib"]
+name = "neoshare"
+
 [dependencies]
-nvim-oxi = "0.5.1"
+nvim-oxi = { version = "0.5.1", features = ["neovim-nightly"] }
