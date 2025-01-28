@@ -1,13 +1,10 @@
-[package]
-name = "neoshare"
+[workspace]
+resolver = "2"
+members = ["crates/plugin", "crates/server"]
+
+[workspace.package]
 version = "0.1.0"
 edition = "2024"
 
-[lib]
-crate-type = ["cdylib"]
+[workspace.metadata.crane]
 name = "neoshare"
-
-[dependencies]
-nvim-oxi = { git = "https://github.com/noib3/nvim-oxi", rev = "a72ad383392c151af8de074c3475276cf5265cf7", features = [
-  "neovim-nightly",
-] }

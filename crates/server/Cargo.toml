@@ -1,0 +1,10 @@
+[package]
+name = "neoshare-server"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "neoshare-server"
+path = "src/main.rs"
+
+[dependencies]
