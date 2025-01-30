@@ -1,10 +1,16 @@
 [workspace]
 resolver = "2"
-members = ["crates/plugin", "crates/server"]
+members = ["crates/plugin", "crates/protocol", "crates/server"]
 
 [workspace.package]
 version = "0.1.0"
 edition = "2024"
+
+[workspace.dependencies]
+yrs = "0.22.0"
+serde = "1.0.217"
+neoshare-protocol = { path = "crates/protocol", version = "0.1.0" }
+uuid = { version = "1.12.1", features = ["v4"] }
 
 [workspace.metadata.crane]
 name = "neoshare"

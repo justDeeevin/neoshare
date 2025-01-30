@@ -1,0 +1,8 @@
+[package]
+name = "neoshare-protocol"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { workspace = true, features = ["derive"] }
+uuid = { workspace = true, features = ["serde"] }

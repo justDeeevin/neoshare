@@ -8,10 +8,12 @@ name = "neoshare-server"
 path = "src/main.rs"
 
 [dependencies]
+clap = { version = "4.5.27", features = ["derive"] }
 futures = "0.3.31"
-serde = "1.0.217"
+serde.workspace = true
 serde_json = "1.0.138"
 tokio = { version = "1.43.0", features = ["full"] }
-uuid = { version = "1.12.1", features = ["v4"] }
+uuid.workspace = true
 warp = "0.3.7"
-yrs = "0.22.0"
+yrs.workspace = true
+neoshare-protocol.workspace = true
