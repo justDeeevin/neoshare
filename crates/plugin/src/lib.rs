@@ -33,7 +33,7 @@ fn start(path: Option<impl Into<String>>) {
 
     alert.push('.');
 
-    print!("{alert}")
+    print!("{alert}");
 }
 
 fn cmd(args: CommandArgs) -> nvim_oxi::Result<()> {
