@@ -50,7 +50,7 @@ async fn handle_connection(socket: WebSocket, doc: Arc<Doc>, clients: Clients) {
         if let Ok(text) = msg.to_str() {
             let Ok(diff) = Update::decode_v2(&serde_json::from_str::<Vec<u8>>(text).unwrap())
             else {
-                tx.send(Message::text("Invalid diff")).unwrap();
+                let _ = tx.send(Message::text("Invalid diff"));
                 continue;
             };
 
@@ -59,7 +59,7 @@ async fn handle_connection(socket: WebSocket, doc: Arc<Doc>, clients: Clients) {
                 if *sub_id == id {
                     continue;
                 }
-                sub_tx.send(msg.clone()).unwrap();
+                let _ = sub_tx.send(msg.clone());
             }
         }
     }
