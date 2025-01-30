@@ -1,11 +1,10 @@
 use nvim_oxi::{
-    Dictionary, Function,
     api::{
         self,
         opts::CreateCommandOpts,
         types::{CommandArgs, CommandNArgs, LogLevel},
     },
-    plugin, print,
+    plugin, print, Dictionary, Function, Object,
 };
 
 #[plugin]
@@ -37,15 +36,17 @@ fn start(path: Option<impl Into<String>>) {
     print!("{alert}")
 }
 
-fn cmd(args: CommandArgs) {
+fn cmd(args: CommandArgs) -> nvim_oxi::Result<()> {
     match args.fargs[0].as_str() {
         "start" => start(args.fargs.get(1)),
         cmd => {
-            let _ = api::notify(
-                &format!("Unknown command \"{cmd}\""),
-                LogLevel::Error,
-                &Dictionary::new(),
-            );
+            error(format!("Unknown command \"{cmd}\""))?;
         }
     }
+
+    Ok(())
+}
+
+fn error(e: impl Into<String>) -> nvim_oxi::Result<Object> {
+    Ok(api::notify(&e.into(), LogLevel::Error, &Dictionary::new())?)
 }
