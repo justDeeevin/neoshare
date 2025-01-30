@@ -39,6 +39,15 @@
       commonArgs = {
         inherit src;
         strictDeps = true;
+
+        nativeBuildInputs = with pkgs; [
+          pkg-config
+          autoPatchelfHook
+        ];
+
+        buildInputs = with pkgs; [
+          openssl
+        ];
       };
 
       craneLibLLvmTools =
@@ -127,6 +136,8 @@
       devShells.default = craneLib.devShell {
         # Inherit inputs from checks.
         checks = self.checks.${system};
+
+        LD_LIBRARY_PATH = "${pkgs.openssl.out}/lib";
       };
     });
 }
