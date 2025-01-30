@@ -18,6 +18,7 @@ type Clients = Arc<RwLock<HashMap<Uuid, mpsc::UnboundedSender<Message>>>>;
 async fn main() {
     let doc = Arc::new(Doc::new());
     let clients = Arc::new(RwLock::new(HashMap::new()));
+    let root = std::env::args().nth(1).unwrap_or(".".to_string());
 
     let join_route = warp::path("join")
         .and(warp::ws())
@@ -26,7 +27,11 @@ async fn main() {
         .map(|ws: Ws, doc, clients| {
             ws.on_upgrade(move |socket| handle_connection(socket, doc, clients))
         });
-    warp::serve(join_route).run(([127, 0, 0, 1], 8080)).await;
+    let file_route = warp::path("file").and(warp::get()).and(warp::fs::dir(root));
+
+    warp::serve(join_route.or(file_route))
+        .run(([127, 0, 0, 1], 8080))
+        .await;
 }
 
 async fn handle_connection(socket: WebSocket, doc: Arc<Doc>, clients: Clients) {
